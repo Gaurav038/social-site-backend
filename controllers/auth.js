@@ -35,7 +35,7 @@ const login = (req, res) => {
             return res.status(404).send("Wrong Password or username")
         }
 
-        const token = jwt.sign({id: data[0].id}, "secretKey")
+        const token = jwt.sign({id: data[0].id}, process.env.SECRET_KEY)
         const {password, ...others} = data[0]
 
         res.cookie("accessToken", token,{

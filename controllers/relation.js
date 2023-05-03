@@ -15,7 +15,7 @@ const addRelation = (req, res) => {
     const token = req.cookies.accessToken
     if(!token) return res.status(401).json("Not Logged in!")
 
-    jwt.verify(token, "secretKey", (err, userInfo) => {
+    jwt.verify(token, process.env.SECRET_KEY, (err, userInfo) => {
         if(err) return res.status(403).json("TOken is not valid")
 
         const q = "INSERT INTO relationship (`followerUserID`, `followedUserID`) VALUES (?)"
@@ -32,7 +32,7 @@ const deleteRelation = (req, res) => {
     const token = req.cookies.accessToken
     if(!token) return res.status(401).json("Not Logged in!")
 
-    jwt.verify(token, "secretKey", (err, userInfo) => {
+    jwt.verify(token, process.env.SECRET_KEY, (err, userInfo) => {
         if(err) return res.status(403).json("TOken is not valid")
 
         const q = "DELETE FROM relationship WHERE `followerUserID` = ? AND `followedUserID` = ?"

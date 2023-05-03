@@ -6,7 +6,7 @@ const getStories = (req, res) => {
     const token = req.cookies.accessToken
     if(!token) return res.status(401).json("Not Logged in!")
 
-    jwt.verify(token, "secretKey", (err, userInfo) => {
+    jwt.verify(token, process.env.SECRET_KEY, (err, userInfo) => {
         if(err) return res.status(403).json("TOken is not valid")
         
       const q = `SELECT s.*, name FROM stories AS s JOIN users AS u ON (u.id = s.userId) LIMIT 4 `;
@@ -23,7 +23,7 @@ const addStories = (req, res) => {
     const token = req.cookies.accessToken
     if(!token) return res.status(401).json("Not Logged in!")
 
-    jwt.verify(token, "secretKey", (err, userInfo) => {
+    jwt.verify(token, process.env.SECRET_KEY, (err, userInfo) => {
         if(err) return res.status(403).json("TOken is not valid")
 
         const q = "INSERT INTO stories (`img`, `userId`) VALUES (?)"
