@@ -6,6 +6,8 @@ const multer = require("multer")
 const cloudinary = require("cloudinary").v2;
 require("dotenv").config();
 
+const PORT = process.env.PORT || 8000
+
 const authRoute = require("./routes/auth")
 const postRoute = require("./routes/posts")
 const commentRoute = require("./routes/comments")
@@ -54,6 +56,6 @@ app.use('/api/user', userRoute)
 app.use('/api/relation', relationRoute)
 app.use('/api/stories', storiesRoute)
 
-app.listen(8000, ()=>{
-    console.log("server running on 8000");
+app.listen(PORT, ()=>{
+    console.log("server running on ", PORT);
 })
